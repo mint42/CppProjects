@@ -10,6 +10,9 @@
 #include <iomanip>
 #include <iostream>
 #include <fstream>
+#include <string>
+
+#include "bag.h"
 
 using namespace std;
 
@@ -18,7 +21,7 @@ Bag::Bag()
 	used = 0;
 }
 
-Bag::Bag(int list[], int size)
+Bag::Bag(int list[], size_t size)
 {
 	if (size < 0 || size > CAPACITY)
 		return ;
@@ -46,32 +49,28 @@ bool		Bag::insert(const int value)
 	return (false);
 }
 
-int			Bag::at(int index)
+int			Bag::at(int index) const
 {
 	if (index < 0 || index > used)
 		return (-9999);
 	return (data[index]);
 }
 
-char		*Bag::toString(void)
+string		Bag::toString(void)
 {
-	if (used <= 0)
+	if (used == 0)
 		return (0);
 
-	size_t	size = (used * 3);
-	char	*news = new(char[size + 1]);
-	news[0] = '[';
-	news[size] = ']';
-	news[size - 1] = itoa(data[used - 1]);
+	string	news("[");
+	news = news + to_string(data[0]);
 
-	size_t	it = 1;
-	for (size_t i = 0; i < used - 1; ++i;
+	for (size_t i = 1; i < used; ++i)
 	{
-		news[it] = itoa(data[i]);
-		news[it + 1] = ",";
-		news[it + 2] = " ";
-		it = it + 3;
+		news.append(", ");
+		news = news + to_string(data[i]);
 	}
+
+	news.append("]");
 	return (news);
 }
 
@@ -80,13 +79,12 @@ void		Bag::sort(void)
 	if (used == 0)
 		return ;
 
-	int		min_index = 0;
-	int		min_value = data[0];
-	bool	is_there_min = false;
+	size_t	min_index = 0;
+	size_t	min_value = data[0];
 
 	for (size_t i = 0; i < used; ++i)
 	{
-		for (int j = i + 1; j < used; ++j)
+		for (size_t j = i + 1; j < used; ++j)
 		{
 			if (data[j] < data[i])
 			{
@@ -102,7 +100,7 @@ void		Bag::sort(void)
 	}
 }
 
-void		Bag::removeDuplicates(void);
+void		Bag::removeDuplicates(void)
 {
 	if (used == 0)
 		return ;
@@ -111,8 +109,8 @@ void		Bag::removeDuplicates(void);
 
 	for (size_t i = 0; i < used; ++i)
 	{
-		this.eraseAll(num);
-		this.insert(num);
+		this->eraseAll(num);
+		this->insert(num);
 	}
 }
 
@@ -162,12 +160,12 @@ int			Bag::howMany(const int value) const
 
 bool		Bag::operator ==(const Bag &other_bag)
 {
-	if (used != other_bag.used)
-		return (false)
+	if (used != other_bag.size())
+		return (false);
 
 	for (size_t i = 0; i < used; ++i)
 	{
-		if (this.howMany(data[i]) != other_bag.howMany(data[i]))
+		if (this->howMany(data[i]) != other_bag.howMany(data[i]))
 			return (false);
 	}
 	return (true);
@@ -177,19 +175,19 @@ void		Bag::operator +=(const Bag &other_bag)
 {
 	if (used + other_bag.used <= CAPACITY)
 	{
-		for (size_t i = 0; i < other_bag.used; ++i)
-			insert(other_bag.data[i]);
+		for (size_t i = 0; i < other_bag.size(); ++i)
+			insert(other_bag.at(i));
 	}
 }
 
 ostream		&operator <<(ostream &outs, const Bag &b)
 {
 	outs << "[";
-	if (b.used > 0)
+	if (b.size() > 0)
 	{
-		outs << b.data[0];
-		for (size_t i = 1; i < b.used; ++i)
-			outs << ", " << b.data[i];
+		outs << b.at(0);
+		for (size_t i = 1; i < b.size(); ++i)
+			outs << ", " << b.at(i);
 	}
 	outs << "]";
 	return (outs);
