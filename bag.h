@@ -50,13 +50,13 @@ class	Bag
 		 */
 		bool		erase(const int value);
 		/**
-		 *  Function:   erase_all
+		 *  Function:   eraseAll
 		 *              erases all instances of "value" from the bag
 		 *
 		 *  @param value - value to be erased
 		 *  @return - true/false based on if the function was successful
 		 */
-		bool		erase_all(const int value);
+		bool		eraseAll(const int value);
 		/**
 		 *  Function:   at
 		 *              returns the value stored at index
@@ -72,7 +72,7 @@ class	Bag
 		 *
 		 *  @return - the string with the contents
 		 */
-		char		*to_string(void);
+		char		*toString(void);
 		/**
 		 *  Function:   sort
 		 *              sorts the contents lowest to highest
