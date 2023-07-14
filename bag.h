@@ -24,14 +24,15 @@ class	Bag
 		 *  Function:   Bag
 		 * 				constructor that gives a list of contents for the bag
 		 */
-		Bag(int [], int size);
+		Bag(int list[], int size);
 		/**
 		 *  Function:   size
 		 *              returns the size of the array
 		 *
-		 *  @return - the size of the array
+		 *  @param list - list of contents to initialize bag
+		 *  @param size - size of that list
 		 */
-		size_t		size() const;
+		size_t		size(void) const;
 		/**
 		 *  Function:   insert
 		 *              inserts "value" to the end of the bag
