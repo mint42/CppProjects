@@ -84,6 +84,14 @@ class	Bag
 		 */
 		void		removeDuplicates(void);
 		/**
+		 *  Function:   howMany
+		 *              counts how many instances of "value" are in the bag
+		 *              current bag
+		 *  @param value - value to be counted
+		 *  @return - # of instances
+		 */
+		int			howMany(const int value) const;
+		/**
 		 *  Operator:   +=
 		 *              adds contents of the given bag to this bag
 		 *              current bag
