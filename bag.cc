@@ -51,26 +51,30 @@ bool		Bag::insert(const int value)
 
 int			Bag::at(int index) const
 {
-	if (index < 0 || index > used)
+	if (index < 0 || index > (int)used)
 		return (-9999);
 	return (data[index]);
 }
 
 string		Bag::toString(void)
 {
+	string	news;
+
 	if (used == 0)
-		return (0);
-
-	string	news("[");
-	news = news + to_string(data[0]);
-
-	for (size_t i = 1; i < used; ++i)
 	{
-		news.append(", ");
-		news = news + to_string(data[i]);
+		news.assign("[]");
+		return (news);
 	}
 
-	news.append("]");
+	news = news + "[";
+	news = news + to_string(data[0]);
+	for (size_t i = 1; i < used; ++i)
+	{
+		news = news + ", ";
+		news = news + to_string(data[i]);
+	}
+	news = news + "]";
+
 	return (news);
 }
 
@@ -79,14 +83,16 @@ void		Bag::sort(void)
 	if (used == 0)
 		return ;
 
-	size_t	min_index = 0;
-	size_t	min_value = data[0];
+	size_t	min_index;
+	int		min_value;
 
-	for (size_t i = 0; i < used; ++i)
+	for (size_t i = 0; i < used - 1; ++i)
 	{
+		min_index = i;
+		min_value = data[i];
 		for (size_t j = i + 1; j < used; ++j)
 		{
-			if (data[j] < data[i])
+			if (data[j] < min_value)
 			{
 				min_index = j;
 				min_value = data[j];
@@ -102,15 +108,18 @@ void		Bag::sort(void)
 
 void		Bag::removeDuplicates(void)
 {
+	size_t	count = 0;
+	int		num;
+
 	if (used == 0)
 		return ;
 
-	int		num = data[0];
-
 	for (size_t i = 0; i < used; ++i)
 	{
-		this->eraseAll(num);
-		this->insert(num);
+		num = data[i];
+		count = this->howMany(num);
+		for (; count > 1; --count)
+			this->erase(num);
 	}
 }
 
