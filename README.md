@@ -9,9 +9,9 @@
 
 ---
 
-### Name: Enter your name
+### Name: Riley Reedy
 
-### Email: Enter your OU email
+### Email: kr480515@ohio.edu
 
 ---
 
