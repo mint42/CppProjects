@@ -10,6 +10,12 @@
 #ifndef BAG_H
 #define BAG_H
 
+#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
 class	Bag
 {
 	public:
@@ -24,7 +30,7 @@ class	Bag
 		 *  Function:   Bag
 		 * 				constructor that gives a list of contents for the bag
 		 */
-		Bag(int list[], int size);
+		Bag(int list[], size_t size);
 		/**
 		 *  Function:   size
 		 *              returns the size of the array
@@ -64,7 +70,7 @@ class	Bag
 		 *  @param index - position to find a value
 		 *  @return - the value at the index. -9999 if it fails
 		 */
-		int			at(int index);
+		int			at(int index) const;
 		/**
 		 *  Function:   toString
 		 *              returns the contents of the bag as a string
@@ -72,7 +78,7 @@ class	Bag
 		 *
 		 *  @return - the string with the contents
 		 */
-		char		*toString(void);
+		string		toString(void);
 		/**
 		 *  Function:   sort
 		 *              sorts the contents lowest to highest
