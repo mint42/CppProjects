@@ -23,8 +23,9 @@ class	Part
 		Part(const Part &other_part);
 		~Part();
 
-		int				get_transaction_by_date(string compare_date) const;
-		int				get_transaction_by_id(int compare_id) const;
+		void			search_transaction_by_date(string compare_date) const;
+		void			search_transaction_by_id(int id) const;
+		void			print_transaction(int index) const;
 		void			add_transaction(string new_date, size_t new_quantity);
 		void			delete_transactions();
 

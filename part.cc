@@ -50,25 +50,32 @@ Part::~Part()
 	delete [] transactions;
 }
 
-int		Part::get_transaction_by_date(string compare_date) const
+void	Part::print_transaction(int index) const
+{
+	if (index < 0 || index > num_transactions)
+		return ;
+	cout << transactions[index].id << " " <<
+			transactions[index].date << " " <<
+			transactions[index].quantity << endl;
+
+}
+
+void	Part::search_transaction_by_date(string compare_date) const
 {
 		for (size_t i = 0; i < num_transactions; ++i)
 		{
 			if (transactions[i].date == compare_date)
-				return (i);
+				print_transaction(i);
 		}
-		return (-1);
-		
 }
 
-int		Part::get_transaction_by_id(int compare_id) const
+void	Part::search_transaction_by_id(int compare_id) const
 {
 		for (size_t i = 0; i < num_transactions; ++i)
 		{
 			if (transactions[i].id == compare_id)
-				return (i);
+				print_transaction(i);
 		}
-		return (-1);
 }
 
 void			Part::add_transaction(string new_date, size_t new_quantity)

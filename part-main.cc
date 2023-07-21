@@ -87,7 +87,7 @@ int				main(int argc, char **argv)
 			cout << "Please enter a date to search: ";
 			cin >> date;
 
-			part->get_transaction_by_date(todays_date);
+			part->search_transaction_by_date(todays_date);
 		}
 		if (command == 4)
 		{
@@ -96,7 +96,7 @@ int				main(int argc, char **argv)
 			cout << "Please enter a date to search: ";
 			cin >> id;
 
-			part->get_transaction_by_id(id);
+			part->search_transaction_by_id(id);
 		}
 		if (command == 5)
 			part->delete_transactions();
