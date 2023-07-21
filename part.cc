@@ -50,11 +50,11 @@ Part::~Part()
 	delete [] transactions;
 }
 
-void	Part::print_transaction(int index) const
+void	Part::print_transaction(int index, ostream &outs) const
 {
 	if (index < 0 || index > num_transactions)
 		return ;
-	cout << transactions[index].id << " " <<
+	outs << transactions[index].id << " " <<
 			transactions[index].date << " " <<
 			transactions[index].quantity << endl;
 
@@ -65,7 +65,7 @@ void	Part::search_transaction_by_date(string compare_date) const
 		for (size_t i = 0; i < num_transactions; ++i)
 		{
 			if (transactions[i].date == compare_date)
-				print_transaction(i);
+				print_transaction(i, cout);
 		}
 }
 
@@ -74,11 +74,11 @@ void	Part::search_transaction_by_id(int compare_id) const
 		for (size_t i = 0; i < num_transactions; ++i)
 		{
 			if (transactions[i].id == compare_id)
-				print_transaction(i);
+				print_transaction(i, cout);
 		}
 }
 
-void			Part::add_transaction(string new_date, size_t new_quantity)
+void	Part::add_transaction(string new_date, size_t new_quantity)
 {
 	if (num_transactions == capacity)
 	{
@@ -113,20 +113,21 @@ string			Part::get_name() const
 	name_copy = name;
 	return (name_copy);
 }
-
 int				Part::get_id() const
 {
 	return (id);
 }
-
 double			Part::get_price() const
 {
 	return (price);
 }
-
 size_t			Part::get_quantity() const
 {
 	return (quantity);
+}
+size_t			Part::get_num_transactions() const
+{
+	return (num_transactions);
 }
 void			Part::set_name(string new_name)
 {

@@ -28,13 +28,41 @@ static void		display_menu()
 	cout << endl;
 }
 
-static void		load_transactions(Part *part, istream *file)
+static void		load_transactions(Part *part, istream &ins)
 {
-	int	 i = 0;
+	string			name;
+	int				id;
+	double			price;
+	size_t			quantity;
+
+	int				trans_id;
+	string			trans_date;
+	size_t			trans_quantity;
+
+	ins >> name;
+	part->set_name(name);
+
+	ins >> id >> price >> quantity;
+	part->set_id(id);
+	part->set_price(price);
+	part->set_quantity(quantity);
+
+	while (!ins.eof())
+	{
+		ins >> trans_id >> trans_date >> trans_quantity;
+		part->add_transaction(trans_date, trans_quantity);
+	}
 }
-static void		unload_transactions(Part *part, ostream *file)
+
+static void		unload_transactions(Part *part, ostream &outs)
 {
-	int	 i = 0;
+	outs << part->get_name();
+	outs << part->get_id() << part->get_price() << part->get_quantity();
+
+	for (size_t i = 0; i < part->get_num_transactions(); ++i)
+	{
+		part->print_transaction(i, outs);
+	}
 }
 
 int				main(int argc, char **argv)
