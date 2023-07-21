@@ -12,13 +12,13 @@ CFLAGS = -g -Wall -std=c++11
 # object files.
 
 a.out: part.o part.h part-main.o
-	$(CC) $(CFLAGS) _TEST/parts.o _TEST/part-main.o -o a.out
+	$(CC) $(CFLAGS) part.o part-main.o -o a.out
 
 parts.o: part.cc part.h
-	$(CC) -c $(CFLAGS) part.cc -o _TEST/part.o
+	$(CC) -c $(CFLAGS) part.cc
 
 parts-main.o: part-main.cc part.h
-	$(CC) -c $(CFLAGS) part-main.cc -o _TEST/part-main.o
+	$(CC) -c $(CFLAGS) part-main.cc
 
 ######################################## R U N   T E S T s ##################################################
 run_tests: 
