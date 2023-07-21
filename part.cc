@@ -80,11 +80,17 @@ void	Part::search_transaction_by_id(int compare_id) const
 		}
 }
 
-void	Part::add_transaction(string new_date, size_t new_quantity)
+void	Part::add_transaction(string new_date, size_t new_quantity, int from_file)
 {
-	if (new_quantity > quantity)
-		cout << "Only " << quantity << " items left in stock. Cannot place order." << endl;
-	quantity = quantity - new_quantity;
+	if (!from_file)
+	{
+		if (new_quantity > quantity)
+		{
+			cout << "Only " << quantity << " items left in stock. Cannot place order." << endl;
+			return ;
+		}
+		quantity = quantity - new_quantity;
+	}
 
 	if (num_transactions == capacity)
 	{
@@ -111,6 +117,8 @@ void			Part::delete_transactions()
 {
 	delete [] transactions;
 	num_transactions = 0;
+	transactions = new Transaction[5];
+	capacity = 5;
 }
 
 string			Part::get_name() const

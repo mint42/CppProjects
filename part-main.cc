@@ -56,7 +56,7 @@ static int		load_transactions(Part *part, ifstream &ins)
 		if (ins.eof())
 			return (1);
 		ins >> trans_date >> trans_quantity;
-		part->add_transaction(trans_date, trans_quantity);
+		part->add_transaction(trans_date, trans_quantity, 1);
 	}
 	return (1);
 }
@@ -137,7 +137,7 @@ int				main(int argc, char **argv)
 			cout << "How many parts would you like?: ";
 			cin >> quantity;
 
-			part->add_transaction(todays_date, quantity);
+			part->add_transaction(todays_date, quantity, 0);
 		}
 		if (command == 3)
 		{
@@ -146,7 +146,7 @@ int				main(int argc, char **argv)
 			cout << "Please enter a transaction date to search: ";
 			cin >> date;
 
-			part->search_transaction_by_date(todays_date);
+			part->search_transaction_by_date(date);
 		}
 		if (command == 4)
 		{

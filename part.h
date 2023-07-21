@@ -26,7 +26,7 @@ class	Part
 		void			search_transaction_by_date(string compare_date) const;
 		void			search_transaction_by_id(int id) const;
 		void			print_transaction(int index, ostream &outs) const;
-		void			add_transaction(string new_date, size_t new_quantity);
+		void			add_transaction(string new_date, size_t new_quantity, int from_file);
 		void			delete_transactions();
 
 		string			get_name() const;
