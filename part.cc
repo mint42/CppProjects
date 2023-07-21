@@ -185,16 +185,3 @@ void			Part::operator=(const Part &other)
 		transactions[i].quantity = other.transactions[i].quantity;
 	}
 }
-
-// friend ostream	&operator<<(ostream &outs, const Part &part)
-// {
-// 	outs << part.name << endl;
-// 	outs << part.id << " " << part.price << " " part.quantity << endl;
-// 
-// 	for (size_t i = 0; i < part.num_transactions; ++i)
-// 	{
-// 		outs << (part.transactions[i]).id <<
-// 		" " << (part.transactions[i]).date <<
-// 		" " << (part.transactions[i]).quantity << endl;
-// 	}
-// }

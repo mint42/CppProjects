@@ -17,7 +17,7 @@ class	Part
 {
 	public:
 		/** Default constructor
-		 * Initializes the id to 0 and the name to "N/A"
+		 * 
 		 */
 		Part();
 		Part(const Part &other_part);
@@ -40,7 +40,6 @@ class	Part
 		void			set_quantity(size_t new_quantity);
 
 		void			operator=(const Part &part);
-		friend ostream	&operator<<(ostream &outs, const Part &the_part);
 
 	private:
 		string			name;
