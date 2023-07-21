@@ -2,10 +2,10 @@
  *    @file: parts-main.cc
  *  @author: Riley Reedy
  *    @date: 7/20/23
- *   @brief: Defining the Transaction struct
- *  
+ *   @brief: interface for parts and transactions
  */
 
+#include <unistd.h>
 #include <ios>
 #include <iostream>
 #include <fstream>
@@ -28,7 +28,7 @@ static void		display_menu()
 	cout << endl;
 }
 
-static void		load_transactions(Part *part, istream &ins)
+static int		load_transactions(Part *part, ifstream &ins)
 {
 	string			name;
 	int				id;
@@ -39,7 +39,10 @@ static void		load_transactions(Part *part, istream &ins)
 	string			trans_date;
 	size_t			trans_quantity;
 
-	ins >> name;
+	getline(ins, name);
+	if (ins.eof())
+		return (0);
+
 	part->set_name(name);
 
 	ins >> id >> price >> quantity;
@@ -49,15 +52,19 @@ static void		load_transactions(Part *part, istream &ins)
 
 	while (!ins.eof())
 	{
-		ins >> trans_id >> trans_date >> trans_quantity;
+		ins >> trans_id;
+		if (ins.eof())
+			return (1);
+		ins >> trans_date >> trans_quantity;
 		part->add_transaction(trans_date, trans_quantity);
 	}
+	return (1);
 }
 
-static void		unload_transactions(Part *part, ostream &outs)
+static void		unload_transactions(Part *part, ofstream &outs)
 {
-	outs << part->get_name();
-	outs << part->get_id() << part->get_price() << part->get_quantity();
+	outs << part->get_name() << endl;
+	outs << part->get_id() << " " << part->get_price() << " " << part->get_quantity() << endl;
 
 	for (size_t i = 0; i < part->get_num_transactions(); ++i)
 	{
@@ -65,10 +72,28 @@ static void		unload_transactions(Part *part, ostream &outs)
 	}
 }
 
+static void		print_transactions_pretty(Part *part)
+{
+	cout << "--------------------------------------------------------" << endl;
+	cout << "          Part NAME: " << part->get_name() << endl;
+	cout << "--------------------------------------------------------" << endl;
+	cout << "Part ID: " << part->get_id() << endl;
+	// cout.set_width(fixe == fixed;
+	cout << "Price: $" << part->get_price() << endl;
+	cout << "Quantity: " << part->get_quantity() << endl;
+	cout << "--------------------------------------------------------" << endl;
+
+	for (size_t i = 0; i < part->get_num_transactions(); ++i)
+	{
+		part->print_transaction(i, cout);
+	}
+	cout << "--------------------------------------------------------" << endl;
+}
+
 int				main(int argc, char **argv)
 {
 	ifstream	ins;
-	Part		*part;
+	Part		*part = new Part();
 	string		todays_date;
 	int			command;
 
@@ -84,7 +109,12 @@ int				main(int argc, char **argv)
 		cout << "failed to open " << argv[1] << endl;
 		return (0);
 	}
-	load_transactions(part, ins);
+
+	if (load_transactions(part, ins) == 0)
+	{
+		cout << "No data to load. Please provide a non empty input file." << endl;
+		return (0);
+	}
 	ins.close();
 
 	cout << "Please enter today's data (Format YYYY-MM-DD): ";
@@ -94,11 +124,12 @@ int				main(int argc, char **argv)
 
 	while (1)
 	{
-		cout << "Please enter a command number: ";
+
+		cout << endl << "Please enter a command number: ";
 		cin >> command;
 
 		if (command == 1)
-			unload_transactions(part, cout);
+			print_transactions_pretty(part);
 		if (command == 2)
 		{
 			size_t	quantity;
@@ -112,7 +143,7 @@ int				main(int argc, char **argv)
 		{
 			string	date;
 
-			cout << "Please enter a date to search: ";
+			cout << "Please enter a transaction date to search: ";
 			cin >> date;
 
 			part->search_transaction_by_date(todays_date);
@@ -121,7 +152,7 @@ int				main(int argc, char **argv)
 		{
 			int		id;
 
-			cout << "Please enter a date to search: ";
+			cout << "Please enter a transaction id to search: ";
 			cin >> id;
 
 			part->search_transaction_by_id(id);
@@ -130,7 +161,7 @@ int				main(int argc, char **argv)
 			part->delete_transactions();
 		if (command == 6)
 		{
-			ofstream	outs;;
+			ofstream	outs;
 
 			outs.open(argv[1], ios::out);
 			if (outs.fail())
@@ -144,6 +175,8 @@ int				main(int argc, char **argv)
 			break ;
 		}
 	}
+
+	delete part;
 
 	return (0);
 }
