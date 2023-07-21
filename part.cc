@@ -19,6 +19,8 @@ Part::Part()
 	id = 0;
 	price = 0;
 	quantity = 0;
+	num_transactions = 0;
+	capacity = 5;
 	transactions = new Transaction[5];
 }
 
@@ -80,6 +82,10 @@ void	Part::search_transaction_by_id(int compare_id) const
 
 void	Part::add_transaction(string new_date, size_t new_quantity)
 {
+	if (new_quantity > quantity)
+		cout << "Only " << quantity << " items left in stock. Cannot place order." << endl;
+	quantity = quantity - new_quantity;
+
 	if (num_transactions == capacity)
 	{
 		capacity = capacity + 5;
@@ -95,9 +101,9 @@ void	Part::add_transaction(string new_date, size_t new_quantity)
 		transactions = new_transactions;
 	}
 
-	transactions[num_transactions - 1].id = num_transactions + 1000;
-	transactions[num_transactions - 1].date = new_date;
-	transactions[num_transactions - 1].quantity = new_quantity;
+	transactions[num_transactions].id = num_transactions + 1000;
+	transactions[num_transactions].date = new_date;
+	transactions[num_transactions].quantity = new_quantity;
 	++num_transactions;
 }
 
@@ -129,6 +135,7 @@ size_t			Part::get_num_transactions() const
 {
 	return (num_transactions);
 }
+#include <unistd.h>
 void			Part::set_name(string new_name)
 {
 	name = new_name;
