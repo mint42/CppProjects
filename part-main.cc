@@ -39,7 +39,7 @@ static void		unload_transactions(Part *part, ostream *file)
 
 int				main(int argc, char **argv)
 {
-	ifstream	*file_in;
+	ifstream	ins;
 	Part		*part;
 	string		todays_date;
 	int			command;
@@ -50,14 +50,14 @@ int				main(int argc, char **argv)
 		return (0);
 	}
 
-	file_in->open(argv[1], ios::in);
-	if (file_in->fail())
+	ins.open(argv[1], ios::in);
+	if (ins.fail())
 	{
 		cout << "failed to open " << argv[1] << endl;
 		return (0);
 	}
-	load_transactions(part, file_in);
-	file_in->close();
+	load_transactions(part, ins);
+	ins.close();
 
 	cout << "Please enter today's data (Format YYYY-MM-DD): ";
 	cin >> todays_date;
@@ -70,7 +70,7 @@ int				main(int argc, char **argv)
 		cin >> command;
 
 		if (command == 1)
-			unload_transactions(part, &cout);
+			unload_transactions(part, cout);
 		if (command == 2)
 		{
 			size_t	quantity;
@@ -102,17 +102,17 @@ int				main(int argc, char **argv)
 			part->delete_transactions();
 		if (command == 6)
 		{
-			ofstream	*file_out;
+			ofstream	outs;;
 
-			file_out->open(argv[1], ios::out);
-			if (file_out->fail())
+			outs.open(argv[1], ios::out);
+			if (outs.fail())
 			{
 				cout << "failed to open " << argv[1] << endl;
 				return (0);
 			}
 
-			unload_transactions(part, file_out);
-			file_out->close();
+			unload_transactions(part, outs);
+			outs.close();
 			break ;
 		}
 	}
