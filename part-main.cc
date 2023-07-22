@@ -13,6 +13,10 @@
 
 #include "part.h"
 
+/*
+ * Function:	display_menu()
+ *				displays a menu of options
+ */
 static void		display_menu()
 {
 	cout << "|------------------------------------------------------|" << endl;
@@ -28,6 +32,13 @@ static void		display_menu()
 	cout << endl;
 }
 
+/*
+ * Function:	load_transactions
+ *				loads transactions in from a file and sets the part object accordingly
+ *	@param - part - part object
+ *	@param - ins - filestream to read from
+ *	@return - 1 if successful, 0 if file is empty
+ */
 static int		load_transactions(Part *part, ifstream &ins)
 {
 	string			name;
@@ -61,6 +72,12 @@ static int		load_transactions(Part *part, ifstream &ins)
 	return (1);
 }
 
+/*
+ * Function:	unload_transactions
+ *				unloads transactions to a file
+ *	@param - part - part object
+ *	@param - outs - filestream to write to
+ */
 static void		unload_transactions(Part *part, ofstream &outs)
 {
 	outs << part->get_name() << endl;
@@ -72,6 +89,12 @@ static void		unload_transactions(Part *part, ofstream &outs)
 	}
 }
 
+/*
+ * Function:	print_transactions_pretty
+ *				prints transaction list and part info to the commandline
+ *				nicely
+ *	@param - part - part object
+ */
 static void		print_transactions_pretty(Part *part)
 {
 	cout << "--------------------------------------------------------" << endl;
@@ -90,6 +113,12 @@ static void		print_transactions_pretty(Part *part)
 	cout << "--------------------------------------------------------" << endl;
 }
 
+/*
+ * Function:	main
+ *				interface that controls the program
+ *	@param - argc - number of args 
+ *	@param - argv - arg names. meant to take in a file name as argv[1]
+ */
 int				main(int argc, char **argv)
 {
 	ifstream	ins;
