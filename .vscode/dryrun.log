@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/nasseef/Documents/online-classes/CS2401-Summer-online/hw/templates/03-hw-template'
+g++ -g -Wall -std=c++11 dlist-main.cc -o a.out
+make: Leaving directory `/Users/nasseef/Documents/online-classes/CS2401-Summer-online/hw/templates/03-hw-template'
+ 
