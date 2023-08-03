@@ -14,6 +14,67 @@
 
 using namespace std;
 
+template <typename DataType>
+class		DList
+{
+	public:
+
+		template <typename ItDataType>
+		class	Iterator
+		{
+			public:
+				using iterator_category = bidirectional_iterator_tag;
+				using diference_type = ptrdiff_t;
+        		using value_type = DNode<ItDataType>;
+        		using pointer = DNode<ItDataType> *;
+        		using reference = DNode<ItDataType> &;
+
+				// initialize the iterator
+				Iterator(DNode<ItDataType> *initial = nullptr) { current = initial; }
+				
+				// Implement the * operator
+				const ItDataType &operator*() const { return (current->getData()); }
+				DNode<ItDataType> *operator->() { return (current); }
+				// overload prefix ++ operator as in ++it
+				Iterator &operator++()
+				{
+					current = current->getNext();
+					return *this;
+				}
+				// overload postfix ++ operator as in it++
+				Iterator operator++(int)
+				{
+					Iterator original = *this;
+					current = current->getNext();
+					return original;
+				}
+				// overload prefix -- operator as in --it
+				Iterator &operator--()
+				{
+					current = current->getPrevious();
+					return *this;
+				}
+				// overload postfix -- operator as in it--
+				Iterator operator--(int)
+				{
+					Iterator original = *this;
+					current = current->getPrevious();
+					return original;
+				}
+				bool operator==(const Iterator other) const
+				{
+					return current == other.current;
+				}
+				
+				bool operator!=(const Iterator other) const
+				{
+					return current != other.current;
+				}
+
+			private:
+				DNode<ItDataType> *current;
+		};
+
 		/**
 		 *	Constructor:			include default values for data and next
 		 *	@param(newHead):		sets the head of the list to the given
