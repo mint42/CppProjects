@@ -1,9 +1,9 @@
 /**
  *   @file: dlist.h
  * @author: Riley Reedy
- *   @date: 7/27/23
+ *   @date: 8/03/23
  *  @brief: Class List uses the DNode class to create a singular
- *          linked list.
+ *          linked list. It also includes an interator class.
  */
 
 #ifndef LIST_H
@@ -33,7 +33,7 @@ class		DList
 				Iterator(DNode<ItDataType> *initial = nullptr) { current = initial; }
 				
 				// Implement the * operator
-				const ItDataType &operator*() const { return (current->getData()); }
+				ItDataType operator*() const { return (current->getData()); }
 				DNode<ItDataType> *operator->() { return (current); }
 				// overload prefix ++ operator as in ++it
 				Iterator &operator++()
