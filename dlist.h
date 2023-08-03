@@ -29,43 +29,81 @@ class		DList
         		using pointer = DNode<ItDataType> *;
         		using reference = DNode<ItDataType> &;
 
-				// initialize the iterator
+				/*
+				 *	Function:			Constructor
+				 *	@param(initial):	iterator pointer to be set to current
+				 *	@return:			N/A
+				 */
 				Iterator(DNode<ItDataType> *initial = nullptr) { current = initial; }
 				
-				// Implement the * operator
+				/*
+				 *	Operator:	*
+				 *	@param():	N/A
+				 *	@return:	data inside the current iterator
+				 */
 				ItDataType operator*() const { return (current->getData()); }
+				/*
+				 *	Operator:	->
+				 *	@param():	N/A
+				 *	@return:	the current iterator
+				 */
 				DNode<ItDataType> *operator->() { return (current); }
-				// overload prefix ++ operator as in ++it
+				/*
+				 *	Operator:	++it
+				 *	@param():	N/A
+				 *	@return:	iterator after increment
+				 */
 				Iterator &operator++()
 				{
 					current = current->getNext();
 					return *this;
 				}
-				// overload postfix ++ operator as in it++
+				/*
+				 *	Operator:	it++
+				 *	@param():	N/A
+				 *	@return:	iterator before increment
+				 */
 				Iterator operator++(int)
 				{
 					Iterator original = *this;
 					current = current->getNext();
 					return original;
 				}
-				// overload prefix -- operator as in --it
+				/*
+				 *	Operator:	--it
+				 *	@param():	N/A
+				 *	@return:	iterator after decrement
+				 */
 				Iterator &operator--()
 				{
 					current = current->getPrevious();
 					return *this;
 				}
-				// overload postfix -- operator as in it--
+				/*
+				 *	Operator:	--it--
+				 *	@param():	N/A
+				 *	@return:	iterator before decrement
+				 */
 				Iterator operator--(int)
 				{
 					Iterator original = *this;
 					current = current->getPrevious();
 					return original;
 				}
+				/*
+				 *	Operator:		==
+				 *	@param(other):	iterator to compare to current
+				 *	@return:		true if they're equal, else false
+				 */
 				bool operator==(const Iterator other) const
 				{
 					return current == other.current;
 				}
-				
+				/*
+				 *	Operator:		!=
+				 *	@param(other):	iterator to compare to current
+				 *	@return:		false if they're equal, else true
+				 */
 				bool operator!=(const Iterator other) const
 				{
 					return current != other.current;
