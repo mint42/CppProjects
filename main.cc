@@ -1,7 +1,7 @@
 /**
- *   @file: predator-prey.cc
- * @author: Nasseef Abukamail
- *   @date: July 28, 2022
+ *   @file: main.cc
+ * @author: Riley Reedy
+ *   @date: 8-3-23
  *  @brief: Predator Pray game of wasps and ants.
  */
 

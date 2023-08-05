@@ -1,7 +1,7 @@
 /**
  *   @file: ant.h
- * @author: Nasseef Abukamail
- *   @date: July 28, 2022
+ * @author: Riley Reedy
+ *   @date: 8-5-23
  *  @brief: Ant class
  */
 

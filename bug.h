@@ -1,7 +1,7 @@
 /**
  *   @file: bug.h
- * @author: Nasseef Abukamail
- *   @date: July 27, 2022
+ * @author: Riley Reedy
+ *   @date: 8-5-23
  *  @brief: Bug base class
  */
 
