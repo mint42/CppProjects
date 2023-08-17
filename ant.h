@@ -78,7 +78,6 @@ void	Ant::move(Bug *grid[][GRID_SIZE])
 		// move to the new spot
 		grid[newR][newC] = this;
 		grid[row][col] = nullptr;
-		return ;
   	}
 }
 
