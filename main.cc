@@ -133,13 +133,14 @@ void		initializeGrid(Bug *grid[][GRID_SIZE])
 
 void	displayGrid(Bug *grid[][GRID_SIZE])
 {
+	cout << "┌────┬─────────────────────────────────────────┐" << endl;
 	for (size_t r = 0; r < GRID_SIZE; ++r)
 	{
-		cout << setw(2) << r + 1 << ' ';
+		cout << "│ " << setw(2) << r + 1 << " │ ";
 		for (size_t c = 0; c < GRID_SIZE; ++c)
 		{
 			if (grid[r][c] == nullptr)
-				cout << 'o';
+				cout << ' ';
 			else
 			{
 				if (grid[r][c]->getSymbol() == ANT_SYMBOL)
@@ -147,11 +148,11 @@ void	displayGrid(Bug *grid[][GRID_SIZE])
 				else
 					cout << COLOR_RED << WASP_SYMBOL << COLOR_WHITE;
 			}
-			if (c < GRID_SIZE - 1)
-				cout << " ";
+			cout << ' ';
 		}
-		cout << endl;
+		cout << "│" << endl;
 	}
+	cout << "└────┴─────────────────────────────────────────┘" << endl;
 }
 
 void	time_step_helper(Bug *grid[][GRID_SIZE], size_t row, size_t col, char symbol)

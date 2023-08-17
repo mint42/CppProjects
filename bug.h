@@ -2,7 +2,7 @@
  *   @file: bug.h
  * @author: Riley Reedy
  *   @date: 8-5-23
- *  @brief: Bug base class implementation
+ *  @brief: Bug base class implementation.
  */
 
 #ifndef BUG_H
@@ -11,8 +11,9 @@
 using namespace std;
 
 // critters
-# define WASP_SYMBOL 'w'
-# define ANT_SYMBOL 'a'
+# define WASP_SYMBOL '%'
+# define ANT_SYMBOL ';'
+# define BUG_SYMBOL '*' // not needed, just for fun
 
 const size_t	GRID_SIZE = 20;
 
@@ -54,7 +55,7 @@ Bug::Bug()
 	steps = 0;
 	row = 0;
 	col = 0;
-	symbol = 'b';
+	symbol = BUG_SYMBOL;
 }
 
 size_t	Bug::getRow() const{return row;}

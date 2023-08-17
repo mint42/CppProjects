@@ -32,7 +32,7 @@ class			Wasp : public Bug
 Wasp::Wasp() : Bug()
 {
 	starve = 0;
-	setSymbol('w');
+	setSymbol(WASP_SYMBOL);
 }
 
 Wasp::Wasp(size_t newR, size_t newC) : Bug()

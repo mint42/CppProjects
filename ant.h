@@ -1,8 +1,8 @@
 /**
  *   @file: ant.h
  * @author: Riley Reedy
- *   @date: 8-5-23
- *  @brief: Ant class prototypes and descriptions.
+ *   @date: 8-17-23
+ *  @brief: Ant class implementation.
  */
 
 #ifndef ANT_H
@@ -25,14 +25,14 @@ class			Ant : public Bug
 
 Ant::Ant() : Bug()
 {
-	setSymbol('a');
+	setSymbol(ANT_SYMBOL);
 }
 
 Ant::Ant(size_t newR, size_t newC) : Bug()
 {
 	setRow(newR);
 	setCol(newC);
-	setSymbol('a');
+	setSymbol(ANT_SYMBOL);
 }
 
 void	Ant::move(Bug *grid[][GRID_SIZE])
