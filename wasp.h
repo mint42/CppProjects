@@ -64,7 +64,11 @@ void	Wasp::move(Bug *grid[][GRID_SIZE])
 		++starve;
 	// can move and eat
 	else if (grid[newR][newC]->getSymbol() == ANT_SYMBOL)
+	{
+		delete grid[newR][newC];
+		grid[newR][newC] = this;
 		starve = 0;
+	}
 	// set coordinates
 	this->setRow(newR);
 	this->setCol(newC);
