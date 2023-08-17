@@ -18,11 +18,42 @@ using namespace std;
 class			Wasp : public Bug
 {
 	public:
+		/*
+		 *	Constructor:	default
+		 *					sets steps, rows and columns to 0
+		 */
 		Wasp();
+		/*
+		 *	Constructor:
+		 *					sets steps to 0, and rows and columns to
+		 *					the given parameters
+		 *	@param(newR):	row position
+		 *	@param(newC):	col position
+		 */
 		Wasp(size_t newR, size_t newC);
-
+		/*
+		 *	Function:		move
+		 *					moves a bug	(Up Down Left or Right) in a random 
+		 *					direction. eats any ants in that spot.
+ 		 *	@param(grid):	a GRID_SIZE x GRID_SIZE play space for the game
+		 *	@return:		N/A
+		 */
 		void	move(Bug *grid[][GRID_SIZE]);
+		/*
+		 *	Function:		breed
+		 *					creates a new bug beside the original after a certain
+		 *					step criteria is met (8 steps) and there is space
+ 		 *	@param(grid):	a GRID_SIZE x GRID_SIZE play space for the game
+		 *	@return:		N/A
+		 */
 		void	breed(Bug *grid[][GRID_SIZE]);
+		/*
+		 *	Function:	getStarve
+		 *				returns the number of time steps the bug has survived
+		 *				since last eating
+		 *	@param():	N/A
+		 *	@return:	number of steps
+		 */
 		size_t	getStarve();
 
 	private:

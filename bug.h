@@ -20,22 +20,121 @@ const size_t	GRID_SIZE = 20;
 class			Bug
 {
 	public:
+		/*
+		 *	Constructor:	default
+		 *					sets steps, rows and columns to 0
+		 */
 				Bug();
+		/*
+		 *	Destructor:		default (virtual)
+		 *					does nothing
+		 */
 		virtual	~Bug(){};
 
+		/*
+		 *	Function:	getRow
+		 *				returns the row of the bug on the grid
+		 *	@param():	N/A
+		 *	@return:	the row
+		 *
+		 */
 		size_t	getRow() const;
+		/*
+		 *	Function:	getCol
+		 *				returns the column of the bug on the grid
+		 *	@param():	N/A
+		 *	@return:	the column
+		 *
+		 */
 		size_t	getCol() const;
+		/*
+		 *	Function:	getSteps
+		 *				returns the number of time steps the bug has survived
+		 *				since last breeding
+		 *	@param():	N/A
+		 *	@return:	number of steps
+		 *
+		 */
 		size_t	getSteps() const;
+		/*
+		 *	Function:	getSymbol
+		 *				returns the symbol of the bug. Defined in bug.h
+		 *	@param():	N/A
+		 *	@return:	the symbol
+		 *
+		 */
 		char	getSymbol() const;
-
+		/*
+		 *	Function:	setRow
+		 *				changes the row variable
+		 *	@param(r):	new row
+		 *	@return:	N/A
+		 */
 		void	setRow(size_t r);
+		/*
+		 *	Function:	setCol
+		 *				changes the column variable
+		 *	@param(c):	new column
+		 *	@return:	N/A
+		 */
 		void	setCol(size_t c);
+		/*
+		 *	Function:	setSteps
+		 *				changes the number of steps 
+		 *	@param(s):	new step count
+		 *	@return:	N/A
+		 */
 		void	setSteps(size_t s);
+		/*
+		 *	Function:	setSymbol
+		 *				changes the symbol of the bug
+		 *	@param(s):	new symbol
+		 *	@return:	N/A
+		 */
 		void	setSymbol(char s);
 
+		/*
+		 *	Function:		choose_new_random_spot
+		 *					chooses a spot for the bug to move to
+		 *					(Up Down Left or Right) and returns the coordinates using
+		 *					references to the original position. nothing is changed
+		 *					if the bug chooses to move towards a border. does
+		 *					not consider if the space is occupied.
+		 *	@param(newR):	comes in as the bug's original row and is updated
+		 *					to the new row if applicable.
+		 *	@param(newC):	comes in as the bug's original column and is updated
+		 *					to the new column if applicable.
+		 *	@return:	N/A
+		 */
 		void	choose_new_random_spot(size_t &newR, size_t &newC);
+		/*
+		 *	Function:		choose_new_free_spot
+		 *					chooses a random free spot for the bug to move to
+		 *					(Up Down Left or Right) and returns the coordinates using
+		 *					references to the original position. nothing is changed
+		 *					if there's no free space available.
+ 		 *	@param(grid):	a GRID_SIZE x GRID_SIZE play space for the game
+		 *	@param(newR):	comes in as the bug's original row and is updated
+		 *					to the new row if applicable.
+		 *	@param(newC):	comes in as the bug's original column and is updated
+		 *					to the new column if applicable.
+		 *	@return:	N/A
+		 */
 		void	choose_new_free_spot(Bug *grid[][GRID_SIZE], size_t &newR, size_t &newC);
+		/*
+		 *	Function:		move (virtual)
+		 *					moves a bug	(Up Down Left or Right)
+ 		 *	@param(grid):	a GRID_SIZE x GRID_SIZE play space for the game
+		 *	@return:	N/A
+		 */
 		virtual void	move(Bug *grid[][GRID_SIZE]){};
+		/*
+		 *	Function:		breed (virtual)
+		 *					creates a new bug beside the original after a certain
+		 *					step criteria is met and there is space
+ 		 *	@param(grid):	a GRID_SIZE x GRID_SIZE play space for the game
+		 *	@return:	N/A
+		 */
 		virtual void	breed(Bug *grid[][GRID_SIZE]){};
 
 	private:
